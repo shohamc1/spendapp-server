@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse
 import os
-from run import app
+#from run import app
 
 app = Flask(__name__)
 api = Api(app)
