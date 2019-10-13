@@ -7,7 +7,7 @@ import json
 app = Flask(__name__)
 api = Api(app)
 
-with open('.\data.json') as f:
+with open('data.json') as f:
     data = json.load(f)
     users = data['data']
 #users = []
@@ -31,7 +31,7 @@ class User (Resource):
         
         user = {"uid": uid, "name": args["name"]}
         users.append(user)
-        with open('.\data.json', 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f), 201
 
     def put (self, uid):
@@ -42,13 +42,13 @@ class User (Resource):
         for testid in range(0, len(users)):
             if (uid == users[testid]["uid"]):
                 users[testid]["name"] = args["name"]
-                with open('.\data.json', 'w') as f:
+                with open('data.json', 'w') as f:
                     json.dump(data, f)
                 return users[testid], 201
         
         user = {"uid": uid, "name": args["name"]}
         users.append(user)
-        with open('.\data.json', 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
         return "UID {} has been added".format(uid), 201
     
@@ -60,7 +60,7 @@ class User (Resource):
                 newusers.append(users[testid])
         #users = [users[testid] for testid in range(0, len(users)) if users[testid]["uid"] != uid]
         data['data'] = newusers
-        with open('.\data.json', 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
         return "{} has been deleted".format(uid), 200
 
