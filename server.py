@@ -67,9 +67,9 @@ class User (Resource):
 api.add_resource(User, "/user/<int:uid>")
 
 #for testing
-app.run(debug=True)
+#app.run(debug=True)
 
 #for deployment
-#if __name__ == '__main__':
-#    port = int(os.environ.get('PORT', 5000))
-#    app.run(host='0.0.0.0', port=port)
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
