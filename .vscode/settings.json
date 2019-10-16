@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\Shoham\\.virtualenvs\\PythonBackend-5HbT0ePC\\Scripts\\python.exe"
+    "python.pythonPath": "C:\\Users\\Shoham\\.virtualenvs\\PythonBackend-5HbT0ePC\\Scripts\\python.exe",
+    "git.ignoreLimitWarning": true
 }
