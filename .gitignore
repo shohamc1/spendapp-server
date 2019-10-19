@@ -3,3 +3,8 @@ data_original_template.json
 main.py
 database.db
 server_original.py
+Pipfile
+Procfile
+data.json
+database.db
+main.py
