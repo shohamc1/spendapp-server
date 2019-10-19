@@ -3,12 +3,13 @@ from flask_restful import Api, Resource, reqparse
 import os
 import json
 import pymongo
+from deployinfo import username, password
 #from run import app
 
 app = Flask(__name__)
 api = Api(app)
 
-client = pymongo.MongoClient("mongodb+srv://user:pass@cluster0-xcamt.gcp.mongodb.net/test?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://" + username + ":" + password + "@cluster0-xcamt.gcp.mongodb.net/test?retryWrites=true&w=majority")
 mydb = client['appdatabase']
 mycol = mydb['names']
 allentries = mycol.find()
