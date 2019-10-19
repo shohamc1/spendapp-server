@@ -8,7 +8,7 @@ import pymongo
 app = Flask(__name__)
 api = Api(app)
 
-client = pymongo.MongoClient("mongodb+srv://shohamc1:shohamc19960@cluster0-xcamt.gcp.mongodb.net/test?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://user:pass@cluster0-xcamt.gcp.mongodb.net/test?retryWrites=true&w=majority")
 mydb = client['appdatabase']
 mycol = mydb['names']
 allentries = mycol.find()
