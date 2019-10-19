@@ -8,5 +8,5 @@ Procfile
 data.json
 database.db
 main.py
-Profile.lock
+Pipfile.lock
 deployinfo.py
