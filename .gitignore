@@ -10,3 +10,4 @@ database.db
 main.py
 Pipfile.lock
 deployinfo.py
+try.py

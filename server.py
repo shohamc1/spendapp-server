@@ -4,22 +4,40 @@ import os
 import json
 import pymongo
 from deployinfo import username, password
+from flask_httpauth import HTTPBasicAuth
+from werkzeug.security import generate_password_hash, check_password_hash
+
 #from run import app
 
 app = Flask(__name__)
 api = Api(app)
+auth = HTTPBasicAuth()
 
 client = pymongo.MongoClient("mongodb+srv://" + username + ":" + password + "@cluster0-xcamt.gcp.mongodb.net/test?retryWrites=true&w=majority")
 mydb = client['appdatabase']
 mycol = mydb['names']
 allentries = mycol.find()
 
-#users = []
-#print (users[1])
+users = {
+    "john": generate_password_hash("hello"),
+    "susan": generate_password_hash("bye")
+}
 
+
+@auth.verify_password
+def verify_password(username, password):
+    if username in users:
+        return check_password_hash(users.get(username), password)
+    return False
+
+@app.route('/')
+@auth.login_required
+def index():
+    return "Hello, %s!" % auth.username()
 
 
 class User (Resource):
+    @auth.login_required
     def get (self, uid):
         allentries = mycol.find()
         for testuser in allentries:
@@ -28,6 +46,7 @@ class User (Resource):
         
         return "User not found", 404
     
+    @auth.login_required
     def post (self, uid):
         allentries = mycol.find()
         parser = reqparse.RequestParser()
@@ -42,6 +61,7 @@ class User (Resource):
         mycol.insert_one(user)
         return user, 201
 
+    @auth.login_required
     def put (self, uid):
         allentries = mycol.find()
         parser = reqparse.RequestParser()
@@ -58,6 +78,7 @@ class User (Resource):
         mycol.insert_one(user)
         return "UID {} has been added".format(uid), 201
     
+    @auth.login_required
     def delete (self, uid):
         allentries = mycol.find()
         mycol.delete_one({"_id": uid})
